@@ -2,5 +2,5 @@
 
 class LBlock: public FourPieceBlock{
 public:
-  LBlock(char xPosition, char yPosition);
+  LBlock(int xPosition, int yPosition);
 };
