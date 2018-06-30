@@ -12,7 +12,7 @@ private:
 public:
   OnePieceBlock(int xPosition, int yPosition);
   int* getAbsolutePosition(int xPosition, int yPosition);
-  bool canGoDown(int xPosition, int yPosition, int** board, int rows);
+  bool canMove(int xPosition, int yPosition, int** board, int maxPosition, int distance, char XorY);
 };
 
 #endif

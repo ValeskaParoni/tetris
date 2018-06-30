@@ -19,8 +19,8 @@ int OnePieceBlock::absoluteYPosition(int yPosition){
   return yPosition + (this->yPosition);
 }
 
-bool OnePieceBlock::canGoDown(int xPosition, int yPosition, int** board, int rows){
-  int newY = this->absoluteYPosition(yPosition);
-  int x = this->absoluteXPosition(xPosition)+1;
-  return (x<rows && !(board[x][newY]));
+bool OnePieceBlock::canMove(int xPosition, int yPosition, int** board, int maxPosition, int distance, char XorY){
+  int newY = this->absoluteYPosition(yPosition) + (XorY=='y'?distance:0);
+  int newX = this->absoluteXPosition(xPosition) + (XorY=='x'?distance:0);
+  return ((XorY=='x'?newX:newY)<maxPosition && !board[newX][newY]);
 }

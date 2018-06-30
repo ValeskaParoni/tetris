@@ -16,16 +16,40 @@ int** FourPieceBlock::getBlockPositions(){
 }
 
 bool FourPieceBlock::canGoDown(int** board, int rows){
+  return this->canMove(board, rows, 1, 'x');
+}
+
+bool FourPieceBlock::canMove(int** board, int maxPosition, int distance, char XorY){
   for (int i = 0; i < 4; i++){
-     if (!(this->pieces[i].canGoDown(this->xPosition, this->yPosition, board, rows))){
-       return false;
-     }
+    if (!(this->pieces[i].canMove(this->xPosition, this->yPosition, board, maxPosition, distance, XorY))){
+      return false;
+    }
   }
-  return true; //se chegou aqui, eh pq todos podem descer
+  return true;
 }
 
 void FourPieceBlock::goDown(int** board, int rows){
-  if (this->canGoDown(board, rows)){
-    this->xPosition = this->xPosition+1;
+  this->move(board, rows, 1, 'x');
+}
+
+void FourPieceBlock::goLeft(int** board, int columns){
+  this->move(board, columns, -1, 'y');
+}
+
+void FourPieceBlock::goRight(int** board, int columns){
+  this->move(board, columns, 1, 'y');
+}
+
+void FourPieceBlock::move(int** board, int maxPosition, int distance, char XorY){
+  //down: maxPosition = numer of rows, distance = +1, XorY = x
+  //left: maxPosition = numer of columns, distance = +1, XorY = y
+  //right: maxPosition = numer of columns, distance = -1, XorY = y
+  if (this->canMove(board, maxPosition, distance, XorY)){
+    if (XorY=='x'){
+      this->xPosition = this->xPosition + distance;
+    }
+    else if (XorY=='y'){
+      this->yPosition = this->yPosition + distance;
+    }
   }
 }
